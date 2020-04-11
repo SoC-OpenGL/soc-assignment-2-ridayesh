@@ -1,0 +1,9 @@
+#version 440 core
+
+in vec3 cubecolour;
+out vec4 Fragment;
+
+void main()
+{
+   Fragment = vec4(cubecolour,1.0f);
+}
