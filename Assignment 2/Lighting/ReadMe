@@ -1,0 +1,18 @@
+This is the third question.
+You can control the camera as follows:
+    1. WASD = Movement
+    2. Mouse = Look Around
+    3. C = To move up
+    4. V = To move down
+    5. Z = To zoom in
+    6. X = To zoom out
+
+To change between Sources of light:
+    1. P = Point Source
+    2. F = Flashlight
+    // DEFAULT = Point Source
+To change between Shading Models:
+    1. B = Blinn-Phong Model
+    2. N = Phong-Model
+
+PLEASE NOTE: CHANGE THE PATHS OF THE TEXTURES, SHADERS WHEREVER NEEDED.
