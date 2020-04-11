@@ -1,0 +1,11 @@
+This is the second question.
+You can control the camera as follows:
+    1. WASD = Movement
+    2. Mouse = Look Around
+    3. C = To move up
+    4. V = To move down
+    5. Z = To zoom in
+    6. X = To zoom out
+
+
+PLEASE NOTE: CHANGE THE PATHS OF THE TEXTURES, SKYBOX IMAGES, SHADERS WHEREVER NEEDED.
