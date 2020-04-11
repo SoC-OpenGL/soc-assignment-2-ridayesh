@@ -1,4 +1,4 @@
-/*#include <iostream>
+#include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <cmath>
@@ -308,7 +308,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 }
        THIS DOES NOT DISTINGUISH BETWEEN A ZOOM IN AND A ZOOM OUT..HENCE USED KEYBOARD KEYS AND NOT SCROLL.
 */
-/*
+
 unsigned int loadCubemap(std::vector<std::string> faces)
 {
     unsigned int textureID;
@@ -340,4 +340,4 @@ unsigned int loadCubemap(std::vector<std::string> faces)
 
     return textureID;
 } 
-*/
+
