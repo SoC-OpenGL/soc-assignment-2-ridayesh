@@ -1,0 +1,63 @@
+#version 440 core
+
+struct Light{
+	vec3 colour;
+	vec3 diffuse;
+	vec3 ambient;
+	vec3 position;
+	vec3 FlashlightDir;
+	float cutoff;
+	float constant;
+	float linear;
+	float quadratic;
+};
+struct Material{
+	float ambientfactor;	
+	sampler2D box_patch;
+	sampler2D spec_patch;
+	sampler2D normal_patch;
+	int shineness;
+};
+
+in vec3 position;
+in vec2 texture;
+in vec3 normal;
+out vec4 fragment;
+
+uniform Light light;
+uniform Material box;
+uniform vec3 playerpos;
+uniform int BlinnPhong;
+float spec;
+float diff;
+float attenuation,distance,theta;
+vec3 diffuse,ambient,specular,result,lightdir,norm,reflected_ray,normalpatch,halfwayVec;
+
+void main()
+{
+	theta = dot(normalize(light.position - position),-normalize(light.FlashlightDir));
+	if(theta>=light.cutoff)
+	{
+		distance = length(light.position - position);
+		attenuation = 1.0f/(light.constant + light.linear*distance + light.quadratic*(distance*distance));
+		lightdir = normalize(light.position - position);
+		normalpatch = length(vec3(texture(box.normal_patch,texture)))*normal*15 + vec3(texture(box.normal_patch,texture));
+		norm = normalize(normalpatch);
+		diff = max(dot(norm,lightdir),0.0f);
+		diffuse = diff*light.diffuse*vec3(texture(box.box_patch,texture));
+		reflected_ray = normalize(reflect(-lightdir,norm));
+		if(BlinnPhong == 1)
+		{
+			halfwayVec = normalize(lightdir + playerpos - position);
+			spec = pow(max(dot(halfwayVec,normalize(normal)),0.0f),box.shineness);
+		}
+		else
+		spec = pow(max(dot(normalize(playerpos - position),reflected_ray),0.0f),box.shineness);
+		specular = spec*light.colour*vec3(texture(box.spec_patch,texture));
+		diffuse *= attenuation;
+		specular *= attenuation;
+	}
+	ambient = box.ambientfactor*light.ambient*vec3(texture(box.box_patch,texture));
+	result = ambient + diffuse + specular;
+	fragment = vec4(result,1.0f);
+}

@@ -1,0 +1,10 @@
+#version 440 core
+in vec3 cube_texture;
+out vec4 fragment;
+uniform samplerCube space;
+
+void main()
+{
+	fragment = texture(space,cube_texture);
+	//fragment = vec4(1.0f,1.0f,1.0f,1.0f);
+}
